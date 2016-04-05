@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="cardModal" tabindex="-1" role="dialog" 
+<div class="modal fade" id="cardModal" role="dialog" 
      aria-labelledby="cardModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -15,7 +15,6 @@
         </h4>
       </div>
       
-
       <div class="modal-body">
         
         <form class="form-horizontal" name="cardForm" role="form">
@@ -44,8 +43,8 @@
                        class="form-control">
               </div>
               <div>
-                <select class="form-control" multiple>
-                  <option ng-repeat="user in users | orderBy:'created_at' | filter:searchEmail" value="user.id">{{user.email}}</option>
+                <select class="form-control" multiple ng-model="card_members">
+                  <option ng-repeat="user in users | orderBy:'created_at' | filter:searchEmail" value="{{user.id}}">{{user.email}}</option>
                 </select>
               </div>
             </div>  

@@ -23,13 +23,13 @@ class ListsController < ApplicationController
   def show
     @list = List.find( params[:id] )
     respond_to do |format|
-      format.json {render json: @board.to_json(include: :cards)}
+      format.json {render json: @list.to_json(include: :cards)}
     end
   end
 
-
   def update
-    @list_params = BList.find( params[:id] )
+    @list = List.find( params[:id] )
+    puts "Found #{@list}"
     if @list.update( list_params )
       respond_to do |format|
         format.json {render json: @list.to_json(include: :cards)}

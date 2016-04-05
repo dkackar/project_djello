@@ -14,10 +14,14 @@ djelloApp.factory('boardService', ['Restangular', 'listService', function(Restan
     };
 
     obj.populateBoards = function(allBoards) {
-       for (var i = 0; i < allBoards.length; i++) { 
-         boards.push(allBoards[i]);
-       }  
-       currentBoard = allBoards[0];
+       if (allBoards.length) {
+          for (var i = 0; i < allBoards.length; i++) { 
+            boards.push(allBoards[i]);
+          }
+          currentBoard = allBoards[0];
+       } else {
+          currentBoard = null;
+       }
     }
 
     obj.getBoards = function() {
@@ -34,8 +38,6 @@ djelloApp.factory('boardService', ['Restangular', 'listService', function(Restan
 
     obj.refreshBoard = function(boardIndex) {
       currentBoard = boards[boardIndex];
-      console.log("In ref");
-      console.log(currentBoard);
       listService.populateboardLists(currentBoard);
     }
 
@@ -43,18 +45,24 @@ djelloApp.factory('boardService', ['Restangular', 'listService', function(Restan
       return Restangular.one( "boards", id).get();
     };
 
-    obj.update = function( boardObj ){
-      boardObj.put();
-    };
-
     obj.create = function ( boardObj ) {
-        return Restangular.all('boards').post(boardObj).then(
-          function(response)  {
+        return Restangular.all('boards').post(boardObj).then(function(response)  {
             boards.unshift(response);
             obj.refreshBoard(0);
         },
         function(response)  {
           alert("Could not add your board: " + boardObj.title);
+       });
+    };
+
+    obj.update = function ( boardObj,data ) {
+        return Restangular.one('boards', boardObj.id).get().then(function(response)  {
+             response.title = data.title;
+             console.log(response);
+             response.put();
+        },
+        function(response)  {
+          alert("Could not update your board: " + boardObj.title);
        });
     };
 

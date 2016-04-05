@@ -15,7 +15,9 @@ gem 'angular_rails_csrf'
 gem 'faker'
 gem 'better_errors'
 gem 'devise'
-
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-x-editable-rails'
+gem "angular-dragdrop-rails"
 source "https://rails-assets.org" do
   gem "rails-assets-angular-devise"
 end

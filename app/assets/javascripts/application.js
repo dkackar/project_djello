@@ -11,14 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 
 //= require underscore-min.js
+
 //= require angular
+//= require angular-dragdrop
 
 //= require restangular.min.js
-//= require angular-ui-router.min.js
 
+//= require angular-ui-router.min.js
+//= require ui-bootstrap-tpls-1.2.5.min.js
 //= require angular-devise
 
 //= require_tree .

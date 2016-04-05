@@ -1,9 +1,11 @@
 
-<div class="card-background">
+<div class="card-background" data-drag="true" 
+     jqyoui-draggable="{animate:true}"
+     jqyoui-draggable jqyoui-droppable data-drop="true">
   <h5><em><strong>{{ card['title']}}</strong></em>
    <button class="btn btn-xs pull-right" type="button" ng-click="removeCard()">
     <img src="assets/erase.png" class="pull-right delete-card-icon">
   </button>
-</h5>
+  </h5>
   <p>{{ card['description']}}</p>
 </div>

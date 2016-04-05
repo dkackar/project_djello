@@ -7,6 +7,6 @@ djelloApp.directive('showCard', [ function() {
       card: '=',
       removeCard: '&',
     },
-    templateUrl: 'templates/directives/cardLayout.html',
+    templateUrl: 'templates/directives/cardLayout.html'
   };
 }]);

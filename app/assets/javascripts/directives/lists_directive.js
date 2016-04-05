@@ -7,6 +7,8 @@ djelloApp.directive('showList', [ function() {
       removeList: '&',
       addCard: '&',
       newCard: '&',
+      removeCard: '&',
+      onaftersave: '&',
     },
     templateUrl: 'templates/directives/listLayout.html'
   };

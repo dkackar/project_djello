@@ -1,5 +1,5 @@
 
-var djelloApp = angular.module("djelloApp", ['ui.router', 'Devise', 'restangular'] );
+var djelloApp = angular.module("djelloApp", ['ui.router', 'Devise', 'restangular', 'xeditable', 'ngDragDrop'] );
 
 djelloApp.config(['$urlRouterProvider', '$stateProvider', 'RestangularProvider', 'AuthProvider',
   function($urlRouterProvider, $stateProvider, RestangularProvider, AuthProvider){
@@ -45,3 +45,4 @@ djelloApp.config(['$urlRouterProvider', '$stateProvider', 'RestangularProvider',
 djelloApp.run(function($rootScope, $location, Auth){
  $rootScope.$on("$stateChangeError", console.log.bind(console));
   });
+

@@ -1,15 +1,19 @@
 <div class="col-xs-3 col-md-3 list-border list-background">
   </br>
   <h5>
-  {{ list['title']}}
-  <button type="button" class="pull-right btn btn-sm btn-danger" 
+  <span editable-text="list.title" ng-model="list.edit"
+       onaftersave="onaftersave()" e-required>
+       {{ list['title'] || 'empty'}} 
+  </span>
+  <button type="button" class="pull-right btn btn-xs btn-danger" 
           ng-click="removeList()">X
   </button>
   </h5>
   </br>
   <!--<p>{{ list['description']}}</p>-->
-  <div ng-repeat="card in list.cards" show-card card="card"
-       remove-card="removeCard(card)">
+  <div ng-repeat="card in list.cards | orderBy:'priority'" 
+       show-card card="card"
+       remove-card="removeCard({card: card})">
   </div>
   <br>
 
@@ -17,6 +21,7 @@
           data-toggle="modal" data-target="#cardModal" 
           ng-click="newCard()"> Add Card
   </button>
+
   <br><br>
 </div>
 
