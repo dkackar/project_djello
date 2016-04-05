@@ -17,19 +17,16 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
   //Should initialize ??
   $scope.cards = cardService.populateCards();
 
-  $scope.users = [];
-
-   
-  $scope.currentList = "";
-
   $scope.board_title = "";
 
   $scope.list_title = "";
   $scope.list_board_id = $scope.currentBoard.id
  
-  $scope.card_title = "";
-  $scope.card_description = "";
-
+  $scope.users = [];
+ 
+  $scope.currentList = "";
+  // $scope.card_title = "";
+  // $scope.card_description = "";
 
   $scope.refreshBoard = function(boardIndex) {
     boardService.refreshBoard(boardIndex);
@@ -56,15 +53,8 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
   $scope.saveBoard = function(data) {
     var saveBoard = {title: data};
    
-    boardService.update($scope.currentBoard,saveBoard).then( function() {
-    });  
-  }
-
-  $scope.saveList = function(listObj) {
-    console.log(listObj.title);
-    var saveList = {title: listObj.title};
-   
-    listService.update(listObj,saveList).then( function() {
+    boardService.update($scope.currentBoard,saveBoard).then( 
+      function() {
     });  
   }
 
@@ -72,6 +62,15 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
     boardService.destroy(boardObj).then(function () {
       $scope.currentBoard = boardService.getCurrentBoard();
     });
+  }
+
+  $scope.saveList = function(listObj) {
+    console.log(listObj.title);
+    var saveList = {title: listObj.title};
+   
+    listService.update(listObj,saveList).then( 
+      function() {
+     });  
   }
 
   $scope.removeList = function(listObj) {
@@ -106,15 +105,19 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
     ); 
   }
 
-  $scope.removeCard = function(cardObj) {
-    console.log("Here");
+  $scope.removeCard = function(cardObj,listObj) {
+    console.log("Card is");
     console.log(cardObj);
-    Restangular.one("cards/" + cardObj.id).remove().then(
-      function(res)  {
-        console.log("Card deleted");
+    console.log(listObj);
+    cardService.destroy(cardObj,listObj).then (
+      function(response) {
+        console.log("In response")
+        console.log(response);
+       listService.removeCard(cardObj,listObj);
+       console.log("Removed your card!");
       },
-      function(res)  {
-        alert("Could not delete your card: " + cardObj.title);
+      function(response) {
+       console.log("Could not remove your card!");
       })
   }
 

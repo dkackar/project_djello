@@ -10,10 +10,11 @@
   </button>
   </h5>
   </br>
-  <!--<p>{{ list['description']}}</p>-->
+  
+  <!-- to show all cards in a list - directive = show-card-->
   <div ng-repeat="card in list.cards | orderBy:'priority'" 
        show-card card="card"
-       remove-card="removeCard({card: card})">
+       remove-card="removeCard({card: card, list: list})">
   </div>
   <br>
 

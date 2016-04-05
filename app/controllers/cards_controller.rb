@@ -14,6 +14,7 @@ class CardsController < ApplicationController
   def create
     @card = Card.new( card_params )
     if @card.save
+      puts "Card is #{@card.id}  and #{@card.title}"
       respond_to do |format|
         format.json {render json: @card.to_json}
       end

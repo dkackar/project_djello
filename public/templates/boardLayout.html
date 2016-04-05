@@ -1,8 +1,7 @@
 
-<h3 class="text-center" editable-text="currentBoard.title" 
-     onbeforesave="saveBoard($data)" e-required 
-     style="color:white;">
-  {{ currentBoard.title || 'empty'}} 
+<h3 class="text-center board-title" editable-text="currentBoard.title" 
+    onbeforesave="saveBoard($data)" e-required>
+     {{ currentBoard.title || 'empty'}} 
 </h3>
 
 <div class="text-center">
@@ -12,9 +11,9 @@
           Add List
   </button>
   <br><br>
-  <!--- Modal -->
 </div> 
 
+<!--Pops up a list modal to enter list details -->
 <div class="modal fade" id="listModal" tabindex="-1" role="dialog" 
      aria-labelledby="listModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -31,7 +30,6 @@
         </h4>
       </div>
       
-      <!-- Modal Body -->
       <div class="modal-body">
         
         <form class="form-horizontal" name="listForm" role="form">
@@ -77,6 +75,7 @@
       </ul>
     </div>
 
+    <!--Pops up a board modal to enter board details -->
     <div>
       <br><br>
       <button class="btn btn-info btn-sm" type="button" data-toggle="modal" 
@@ -129,10 +128,11 @@
 
   </div>
 
+  <!-- to show all lists in the current board, show-list directive --> 
   <div class="col-md-10 col-lg-10">
     <div ng-repeat="list in lists" show-list list="list" 
          add-card="addCard()" remove-list="removeList(list)" 
-         remove-card="removeCard(card)"
+         remove-card="removeCard(card,list)"
          new-card="newCard(list)" onaftersave="saveList(list)">
     </div>
   </div>  

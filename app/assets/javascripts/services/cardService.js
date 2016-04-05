@@ -1,9 +1,10 @@
-djelloApp.factory('cardService', ['Restangular', function(Restangular){
+djelloApp.factory('cardService', ['Restangular', 'listService',function(Restangular,listService){
 
     var obj = {};
     var currenCard;
     var cards = [];
 
+   // I think I dont use this - remove it later after checking
     obj.populateCards = function(listObj){
       if (listObj && listObj.lists.length) { 
         cards.splice(0,cards.length);
@@ -23,32 +24,37 @@ djelloApp.factory('cardService', ['Restangular', function(Restangular){
       cards.push(cardObj);
     };
 
-    obj.create = function(cardObj, card_members) {
+    obj.create = function(cardObj,listObj,card_members) {
       return Restangular.all('cards').post(cardObj).then(
         function(response)  {
-          obj.addOne(response);
-          for (var i = 0; i < card_members.length; i++) {
-             Restangular.all('card_members').post({card_id: response.id, user_id: card_members[i]}).then(  function(response) {
-                 alert("Added the card and members");
-               },
-               function(response) {
-                 alert("Could not add the card members");
-               })
-          };
+          listService.addCard(response,listObj);
+          obj.create_members(response,card_members);
         },
         function(response)  {
            alert("Could not add your card: " + $scope.card_title);
        });
     };
 
-    obj.destroy = function(listObj) {
-      return Restangular.one("lists/" + listObj.id).remove().then(
+
+    obj.create_members = function(cardObj, card_members) {
+      for (var i = 0; i < card_members.length; i++) {
+        Restangular.all('card_members').post({card_id: cardObj.id, user_id: card_members[i]}).then(
+          function(response) {
+            console.log("Added the card and members");
+          },
+          function(response) {
+            alert("Could not add a card member");
+          })
+      };
+    };
+
+    obj.destroy = function(cardObj,listObj) {
+      return Restangular.one("cards/" + cardObj.id).remove().then(
         function(res)  {
-          boardLists.splice(boardLists.indexOf(listObj), 1);
-          alert("Deleted your list: " + listObj.title);
+          alert("Deleted your card: " + cardObj.title);
         },
         function(res)  {
-          alert("Could not delete your list: " + listObj.title);
+          alert("Could not delete your card: " + cardObj.title);
         }
       )
     };

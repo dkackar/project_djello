@@ -32,11 +32,6 @@ djelloApp.config(['$urlRouterProvider', '$stateProvider', 'RestangularProvider',
         params: {
           list: null
         },
-        // resolve: {
-        //   allCards: ['Restangular', function(Restangular){
-        //     return Restangular.all('cardmembers').getList();
-        //   }]
-        // }
       })
      $urlRouterProvider.otherwise('/board');
 

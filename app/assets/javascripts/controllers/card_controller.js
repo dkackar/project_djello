@@ -15,24 +15,18 @@ djelloApp.controller('CardCtrl', ['boardService', 'listService', 'cardService', 
         completed: false,
         priority: $scope.card_members.length
       }
-      cardService.create(newCard,$scope.card_members);
+      cardService.create(newCard,$scope.currentList,$scope.card_members).then(
+        function(response) {
+          console.log("Added a new card");
+          $scope.card_description = "";
+          $scope.card_title = "";
+          $scope.completed = false;
+          $scope.card_members = "";
+        },
+        function(response) {
+          alert("Error in add your card!")
+        })
     }
-  }
-
-  $scope.removeCard = function(cardObj) {
-
-    Restangular.all('cards').post(newCard).then(
-      function(response)  {
-
-        for (var i = 0; i < $scope.card_members.length; i++) {
-         Restangular.all('card_members').post({card_id: response.id, user_id: $scope.card_members[i]}).then( function() {
-           })
-        };
-      },
-      function(response)  {
-         alert("Could not add your card: " + $scope.card_title);
-     });
-  
   }
 
 }]);

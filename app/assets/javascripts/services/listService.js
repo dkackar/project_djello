@@ -30,13 +30,24 @@ djelloApp.factory('listService', ['Restangular', function(Restangular){
        });
     };
 
+    obj.addCard = function(card,list) {
+     var index = boardLists.indexOf(list);
+     boardLists[index].cards.push(card);
+    };
+
+    obj.removeCard = function(card,list) {
+      var listIndex = boardLists.indexOf(list);
+      console.log("List is " + listIndex + " cards are");
+      console.log(boardLists[listIndex].cards);
+      var cardIndex =  boardLists[listIndex].cards.indexOf(card);
+      boardLists[listIndex].cards.splice( cardIndex,1);
+    };
+
     obj.update = function ( listObj,data ) {
-        return Restangular.one('lists', listObj.id).get().then(function(response)  {
-             console.log(data.title);
-                  console.log(response);
-             response.title = data.title;
-             console.log(response);
-             response.put();
+      return Restangular.one('lists', listObj.id).get().then(
+        function(response)  {
+          response.title = data.title;
+          response.put();
         },
         function(response)  {
           alert("Could not update your list: " + listObj.title);
