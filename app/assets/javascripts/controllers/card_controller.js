@@ -17,7 +17,6 @@ djelloApp.controller('CardCtrl', ['boardService', 'listService', 'cardService', 
       }
       cardService.create(newCard,$scope.currentList,$scope.card_members).then(
         function(response) {
-          console.log("Added a new card");
           $scope.card_description = "";
           $scope.card_title = "";
           $scope.completed = false;
