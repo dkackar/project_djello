@@ -6,10 +6,12 @@ djelloApp.factory('listService', ['Restangular', function(Restangular){
     var boardLists = [];
 
     obj.populateboardLists = function(boardObj){
-      boardLists.splice(0,boardLists.length);
-      for (var i = 0; i < boardObj.lists.length; i++) {
-        boardLists.push(boardObj.lists[i]);
-      }
+      if (boardObj) {
+        boardLists.splice(0,boardLists.length);
+        for (var i = 0; i < boardObj.lists.length; i++) {
+            boardLists.push(boardObj.lists[i]);
+        }
+      }  
     };
 
     obj.getBoardLists = function(){

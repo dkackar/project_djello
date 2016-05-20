@@ -8,8 +8,9 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
 
   // Initializes the scope boards arrray
   $scope.boards       = boardService.getBoards(); 
+
   $scope.currentBoard = boardService.getCurrentBoard();
-  
+
   // Initializes the list array in service with current board lists
   listService.populateboardLists($scope.currentBoard);
   $scope.lists = listService.getBoardLists();
@@ -20,7 +21,7 @@ djelloApp.controller('BoardCtrl', ['Restangular', 'Auth', 'boardService', 'listS
   $scope.board_title = "";
 
   $scope.list_title = "";
-  $scope.list_board_id = $scope.currentBoard.id
+  $scope.list_board_id = boardService.getCurrentBoardId($scope.currentBoard);
  
   $scope.users = [];
  

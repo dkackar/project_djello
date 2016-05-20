@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
 
   def index
+    puts "Here user id is #{current_user.id}"
     @boards = Board.all.order('created_at DESC').where("user_id = ?" ,current_user.id)
     respond_to do |format|
       #format.json {render json: @boards.to_json(include: :lists)}

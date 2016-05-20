@@ -11,7 +11,15 @@ djelloApp.factory('boardService', ['Restangular', 'listService', function(Restan
         return Restangular.all("boards").getList().then(function(data){
             obj.index = data;
         });
-    };
+    }
+
+    obj.getCurrentBoardId  = function() {
+      if (currentBoard != null) {
+        return currentBoard.id;
+      } else {
+        return null;
+      }
+    }
 
     obj.populateBoards = function(allBoards) {
        if (allBoards.length) {
